@@ -24,7 +24,7 @@ func main() {
 	fmt.Println("database and table created")
 
 	router := mux.NewRouter()
-	router.HandleFunc("/list/", list_data).Methods("GET")
+	router.HandleFunc("/api/v1/ad", list_data).Methods("GET")
 	router.HandleFunc("/api/v1/ad", add_data).Methods("POST")
 
 	fmt.Println("Server is running")
@@ -62,10 +62,6 @@ func add_data(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Failed to parse JSON", http.StatusBadRequest)
 		return
 	}
-	fmt.Println("---")
-	fmt.Println("Title: ", userData.Title)
-	fmt.Println("Contition: Platforms", userData.Conditions.Platform)
-	fmt.Println("---")
 
 	err = models.InsertAd(userData)
 	if err != nil {

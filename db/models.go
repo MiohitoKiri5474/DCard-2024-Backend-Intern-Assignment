@@ -36,7 +36,6 @@ func CompressJSON(OriList []string) string {
 		}
 		res += i
 	}
-	fmt.Println("\t" + res)
 	return res
 }
 
@@ -70,7 +69,6 @@ func CreateTable(DDBFileName string) {
 
 func InsertAd(AdData Ad) error {
 	// Create Ad
-	fmt.Println(AdData)
 	_, err := sqldb.Exec("INSERT INTO ads (title, start_at, end_at, age_start, age_end, country, platform) VALUES (?, ?, ?, ?, ?, ?, ?)",
 		AdData.Title,
 		AdData.StartAt,
@@ -113,6 +111,7 @@ func QueryAd(offset int, limit int, age string, gender string, country string, p
 	defer rows.Close()
 
 	var res []Ad
+	fmt.Println(res)
 
 	for rows.Next() {
 		var ad Ad
