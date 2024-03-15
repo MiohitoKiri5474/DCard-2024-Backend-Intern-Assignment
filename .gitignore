@@ -21,3 +21,6 @@
 go.work
 
 node_modules/
+main
+*.db
+test.json
