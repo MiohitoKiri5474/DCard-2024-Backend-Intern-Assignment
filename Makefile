@@ -6,3 +6,6 @@ create_db:
 
 run:
 	go run cmd/AD_Post/main.go
+
+test:
+	go test ./db
