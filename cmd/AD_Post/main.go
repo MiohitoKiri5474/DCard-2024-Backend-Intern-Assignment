@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"os"
 	"strconv"
 
 	"github.com/gorilla/mux"
@@ -14,14 +13,7 @@ import (
 
 func main() {
 	DDBFileName := "ad.db"
-	if _, err := os.Stat(DDBFileName); os.IsNotExist(err) {
-		models.BuildDB(DDBFileName)     // create database if the file is not exist
-		models.CreateTable(DDBFileName) // create table if the table is not exist
-	} else {
-		models.ConnectDB(DDBFileName)
-	}
-
-	fmt.Println("database and table created")
+	models.ConnectDB(DDBFileName)
 
 	router := mux.NewRouter()
 	router.HandleFunc("/api/v1/ad", list_data).Methods("GET")
@@ -56,7 +48,7 @@ func list_data(w http.ResponseWriter, r *http.Request) {
 
 func add_data(w http.ResponseWriter, r *http.Request) {
 	// add new data
-	var userData models.Ad
+	var userData models.JsonParse
 	err := json.NewDecoder(r.Body).Decode(&userData)
 	if err != nil {
 		http.Error(w, "Failed to parse JSON", http.StatusBadRequest)
