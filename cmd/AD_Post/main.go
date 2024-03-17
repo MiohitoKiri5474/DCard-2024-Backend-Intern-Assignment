@@ -24,17 +24,6 @@ func main() {
 	log.Fatal(http.ListenAndServe(":8000", router))
 }
 
-func PrintAd(input models.Ad) {
-	fmt.Println("title:\t\t", input.Title)
-	fmt.Println("StartAt:\t", input.StartAt)
-	fmt.Println("EndAt:\t\t", input.EndAt)
-	fmt.Println("AgeStart:\t", input.AgeStart)
-	fmt.Println("AgeEnd:\t\t", input.AgeEnd)
-	fmt.Println("Gender:\t\t", input.Gender)
-	fmt.Println("Country:\t", input.Country)
-	fmt.Println("Platform:\t", input.Platform)
-}
-
 func list_data(w http.ResponseWriter, r *http.Request) {
 	// list all data
 	QueryParams := r.URL.Query()
