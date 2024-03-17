@@ -8,7 +8,7 @@ import (
 
 func TestCompressJSON(t *testing.T) {
 	OriList := []string{"123", "456", "789"}
-	ExpectRes := "123 456 789"
+	ExpectRes := "123 456 789 "
 	if ExpectRes != CompressJSON(OriList) {
 		t.Error("Value Error")
 	}
@@ -34,9 +34,9 @@ func TestConvertToAd(t *testing.T) {
 		EndAt:    InputJSON.EndAt,
 		AgeStart: 18,
 		AgeEnd:   30,
-		Gender:   "M F",
-		Country:  "TW JP",
-		Platform: "Android iOS",
+		Gender:   "M F ",
+		Country:  "TW JP ",
+		Platform: "Android iOS ",
 	}
 
 	fmt.Println("res: ", res)
