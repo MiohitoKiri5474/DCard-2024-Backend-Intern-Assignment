@@ -1,6 +1,7 @@
 package db
 
 import (
+	"AD_Post/models"
 	"fmt"
 	"testing"
 	"time"
@@ -15,11 +16,11 @@ func TestCompressJSON(t *testing.T) {
 }
 
 func TestConvertToAd(t *testing.T) {
-	InputJSON := JsonParse{
+	InputJSON := models.JsonParse{
 		Title:   "Testing Ad",
 		StartAt: time.Now(),
 		EndAt:   time.Now().AddDate(0, 1, 0),
-		Conditions: Conditions{
+		Conditions: models.Conditions{
 			AgeStart: 18,
 			AgeEnd:   30,
 			Gender:   []string{"M", "F"},
@@ -28,7 +29,7 @@ func TestConvertToAd(t *testing.T) {
 		},
 	}
 	res := ConvertToAd(InputJSON)
-	cmp := Ad{
+	cmp := models.Ad{
 		Title:    "Testing Ad",
 		StartAt:  InputJSON.StartAt,
 		EndAt:    InputJSON.EndAt,
@@ -48,15 +49,15 @@ func TestConvertToAd(t *testing.T) {
 
 func TestConnectDB(t *testing.T) {
 	ConnectDB("123.db")
-	sqldb.AutoMigrate(&Ad{})
+	sqldb.AutoMigrate(&models.Ad{})
 }
 
 func TestInsertAd(t *testing.T) {
-	InsertAd(JsonParse{
+	InsertAd(models.JsonParse{
 		Title:   "Testing Ad",
 		StartAt: time.Now(),
 		EndAt:   time.Now().AddDate(0, 1, 0),
-		Conditions: Conditions{
+		Conditions: models.Conditions{
 			AgeStart: 18,
 			AgeEnd:   30,
 			Gender:   []string{"M", "F"},
