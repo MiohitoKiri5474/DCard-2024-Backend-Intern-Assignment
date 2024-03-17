@@ -3,6 +3,7 @@ package models
 import (
 	"fmt"
 	"log"
+	"strings"
 	"time"
 
 	"gorm.io/driver/sqlite"
@@ -21,7 +22,7 @@ type JsonParse struct {
 	Title      string     `json:"title"`
 	StartAt    time.Time  `json:"startAt"`
 	EndAt      time.Time  `json:"endAt"`
-	Conditions Conditions `json:"contitions"`
+	Conditions Conditions `json:"conditions"`
 }
 
 type Ad struct {
@@ -41,10 +42,7 @@ var sqldb *gorm.DB
 func CompressJSON(OriList []string) string {
 	var res string
 	for _, i := range OriList {
-		if res != "" {
-			res += " "
-		}
-		res += i
+		res += i + " "
 	}
 	return res
 }
@@ -81,5 +79,35 @@ func InsertAd(AdData JsonParse) error {
 
 func QueryAd(offset int, limit int, age string, gender string, country string, platform string) ([]Ad, error) {
 	// Query Ads from the db
-	return []Ad{}, nil
+	var res []Ad
+	query := sqldb.Model(&Ad{})
+
+	if age != "" {
+		query = query.Where("age_start <= ?", age)
+		query = query.Where("age_end >= ?", age)
+	}
+
+	if country != "" {
+		CountryStr := strings.Join(strings.Split(country, ","), " ")
+		query = query.Where("country LIKE ?", "%"+CountryStr+"%")
+	}
+
+	if platform != "" {
+		PlatformStr := strings.Join(strings.Split(platform, ","), " ")
+		query = query.Where("platform LIKE ?", "%"+PlatformStr+"%")
+	}
+	if gender != "" {
+		GenderStr := strings.Join(strings.Split(gender, ","), " ")
+		query = query.Where("gender LIKE ?", "%"+GenderStr+"%")
+	}
+
+	query = query.Order("end_at asc")
+	if offset >= 0 && limit > 0 {
+		query = query.Offset(offset).Limit(limit)
+	}
+
+	if err := query.Find(&res).Error; err != nil {
+		return nil, err
+	}
+	return res, nil
 }
