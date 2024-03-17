@@ -9,3 +9,6 @@ run:
 
 test:
 	go test ./db
+
+clean:
+	rm -rf build ad.db
