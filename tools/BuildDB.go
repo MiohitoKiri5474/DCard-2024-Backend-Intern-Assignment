@@ -1,7 +1,7 @@
 package main
 
 import (
-	"AD_Post/db"
+	"AD_Post/models"
 	"log"
 
 	"gorm.io/driver/sqlite"
