@@ -1,41 +1,14 @@
-package models
+package db
 
 import (
+	"AD_Post/models"
 	"fmt"
 	"log"
 	"strings"
-	"time"
 
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
-
-type Conditions struct {
-	AgeStart int      `json:"ageStart"`
-	AgeEnd   int      `json:"ageEnd"`
-	Gender   []string `json:"gender"`
-	Country  []string `json:"country"`
-	Platform []string `json:"platform"`
-}
-
-type JsonParse struct {
-	Title      string     `json:"title"`
-	StartAt    time.Time  `json:"startAt"`
-	EndAt      time.Time  `json:"endAt"`
-	Conditions Conditions `json:"conditions"`
-}
-
-type Ad struct {
-	gorm.Model
-	Title    string    `json:"title" db:"title"`
-	StartAt  time.Time `json:"startAt" db:"start_at"`
-	EndAt    time.Time `json:"endAt" db:"end_at"`
-	AgeStart int       `json:"ageStart" db:"age_start"`
-	AgeEnd   int       `json:"ageEnd" db:"age_end"`
-	Gender   string    `json:"gender" db:"gender"`
-	Country  string    `json:"country" db:"country"`
-	Platform string    `json:"platform" db:"platform"`
-}
 
 var sqldb *gorm.DB
 
@@ -47,8 +20,8 @@ func CompressJSON(OriList []string) string {
 	return res
 }
 
-func ConvertToAd(input JsonParse) Ad {
-	return Ad{
+func ConvertToAd(input models.JsonParse) models.Ad {
+	return models.Ad{
 		Title:    input.Title,
 		StartAt:  input.StartAt,
 		EndAt:    input.EndAt,
@@ -70,17 +43,17 @@ func ConnectDB(DDBFileName string) {
 	fmt.Println("Connect Created")
 }
 
-func InsertAd(AdData JsonParse) error {
+func InsertAd(AdData models.JsonParse) error {
 	// Create Ad
 	Converted := ConvertToAd(AdData)
 	sqldb.Create(&Converted)
 	return nil
 }
 
-func QueryAd(offset int, limit int, age string, gender string, country string, platform string) ([]Ad, error) {
+func QueryAd(offset int, limit int, age string, gender string, country string, platform string) ([]models.Ad, error) {
 	// Query Ads from the db
-	var res []Ad
-	query := sqldb.Model(&Ad{})
+	var res []models.Ad
+	query := sqldb.Model(&models.Ad{})
 
 	if age != "" {
 		query = query.Where("age_start <= ?", age)
