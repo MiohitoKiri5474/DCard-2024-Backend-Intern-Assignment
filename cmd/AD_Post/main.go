@@ -28,8 +28,14 @@ func list_data(w http.ResponseWriter, r *http.Request) {
 	// list all data
 	QueryParams := r.URL.Query()
 	// require condition
-	offset, _ := strconv.Atoi(QueryParams.Get("offset"))
-	limit, _ := strconv.Atoi(QueryParams.Get("limit"))
+	OffsetStr, LimitStr := QueryParams.Get("offset"), QueryParams.Get("limit")
+	offset, limit := 5, 5
+	if OffsetStr != "" {
+		offset, _ = strconv.Atoi(OffsetStr)
+	}
+	if LimitStr != "" {
+		limit, _ = strconv.Atoi(LimitStr)
+	}
 
 	// optional condition
 	age := QueryParams.Get("age")
