@@ -71,15 +71,23 @@ func list_data(w http.ResponseWriter, r *http.Request) {
 
 func add_data(w http.ResponseWriter, r *http.Request) {
 	// add new data
+	defer func() {
+		if r := recover(); r != nil {
+			errMsg := fmt.Sprintf("Invalid parameter: %v", r)
+			http.Error(w, errMsg, http.StatusBadRequest)
+		}
+	}()
 	var userData models.JsonParse
-	err := json.NewDecoder(r.Body).Decode(&userData)
-	if err != nil {
+	if err := json.NewDecoder(r.Body).Decode(&userData); err != nil {
 		http.Error(w, "Failed to parse JSON", http.StatusBadRequest)
 		return
 	}
 
-	err = db.InsertAd(userData)
-	if err != nil {
+	if err := CheckJSon(userData); err != nil {
+		panic(err.Error())
+	}
+
+	if err := db.InsertAd(userData); err != nil {
 		http.Error(w, "Failed to add data to database", http.StatusInternalServerError)
 		return
 	}
