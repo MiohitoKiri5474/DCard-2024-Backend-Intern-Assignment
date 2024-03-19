@@ -17,8 +17,8 @@ func main() {
 	db.ConnectDB(DDBFileName)
 
 	router := mux.NewRouter()
-	router.HandleFunc("/api/v1/ad", list_data).Methods("GET")
-	router.HandleFunc("/api/v1/ad", add_data).Methods("POST")
+	router.HandleFunc("/ad", list_data).Methods("GET")
+	router.HandleFunc("/ad", add_data).Methods("POST")
 
 	fmt.Println("Server is running")
 	log.Fatal(http.ListenAndServe(":8000", router))
