@@ -41,7 +41,7 @@ func CheckCountry(str string) error {
 
 func CheckPlatform(str string) error {
 	// check platform is valid
-	if str != "web" && str != "iso" && str != "android" {
+	if str != "web" && str != "ios" && str != "android" {
 		panic("(platform) invalid platform")
 	}
 	return nil
