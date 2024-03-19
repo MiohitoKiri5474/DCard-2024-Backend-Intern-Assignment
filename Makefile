@@ -4,8 +4,8 @@ build:
 create_db:
 	go run tools/BuildDB.go
 
-run:
-	go run cmd/AD_Post/main.go
+run: build create_db
+	./AD_Post
 
 test:
 	go test ./db
