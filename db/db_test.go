@@ -2,7 +2,6 @@ package db
 
 import (
 	"AD_Post/models"
-	"fmt"
 	"testing"
 	"time"
 )
@@ -40,8 +39,6 @@ func TestConvertToAd(t *testing.T) {
 		Platform: "Android iOS ",
 	}
 
-	fmt.Println("res: ", res)
-	fmt.Println("cmp: ", cmp)
 	if res != cmp {
 		t.Error("Value Error")
 	}
@@ -81,5 +78,15 @@ func BenchmarkInsertAd(b *testing.B) {
 				Platform: []string{"Android", "iOS"},
 			},
 		})
+	}
+}
+
+func TestQueryAd(t *testing.T) {
+	QueryAd(15, 20, "24", "M", "TW", "iOS")
+}
+
+func BenchmarkQueryAd(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		QueryAd(15, 20, "24", "M", "TW", "iOS")
 	}
 }
