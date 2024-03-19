@@ -5,12 +5,14 @@ import (
 	"unicode"
 )
 
-func AgeCheck(str string) bool {
+func AgeCheck(str string) error {
 	for _, char := range str {
 		if !unicode.IsDigit(char) {
-			return false
+			panic("non-digit input")
 		}
 	}
-	num, _ := strconv.Atoi(str)
-	return 1 <= num && num <= 100
+	if num, _ := strconv.Atoi(str); num < 1 || 100 < num {
+		panic("out of range")
+	}
+	return nil
 }

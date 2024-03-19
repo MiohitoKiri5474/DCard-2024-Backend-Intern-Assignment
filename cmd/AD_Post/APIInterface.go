@@ -4,12 +4,19 @@ import (
 	"AD_Post/db"
 	"AD_Post/models"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"strconv"
 )
 
 func list_data(w http.ResponseWriter, r *http.Request) {
 	// list all data
+	defer func() {
+		if r := recover(); r != nil {
+			errMsg := fmt.Sprintf("Invalid age parameter: %v", r)
+			http.Error(w, errMsg, http.StatusBadRequest)
+		}
+	}()
 	QueryParams := r.URL.Query()
 	// require condition
 	OffsetStr, LimitStr := QueryParams.Get("offset"), QueryParams.Get("limit")
@@ -23,8 +30,8 @@ func list_data(w http.ResponseWriter, r *http.Request) {
 
 	// optional condition
 	age := QueryParams.Get("age")
-	if !AgeCheck(age) {
-		http.Error(w, "Invalid age parameter: out of range", http.StatusBadRequest)
+	if err := AgeCheck(age); err != nil {
+		panic(err.Error())
 	}
 	gender := QueryParams.Get("gender")
 	country := QueryParams.Get("country")
