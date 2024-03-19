@@ -78,7 +78,7 @@ func TestCheckCountryFailed(t *testing.T) {
 
 func TestCheckPlatform(t *testing.T) {
 	// Test CheckPlatform, suppose panic will not occur
-	if err := CheckPlatform("ios"); err != nil {
+	if err := CheckPlatform("iOS"); err != nil {
 		t.Error()
 	}
 
@@ -86,7 +86,7 @@ func TestCheckPlatform(t *testing.T) {
 		t.Error()
 	}
 
-	if err := CheckPlatform("android"); err != nil {
+	if err := CheckPlatform("Android"); err != nil {
 		t.Error()
 	}
 }
