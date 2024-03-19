@@ -9,6 +9,7 @@ run: build create_db
 
 test:
 	go test ./db
+	go test ./cmd/AD_Post/
 
 clean:
 	rm -rf AD_Post ad.db
