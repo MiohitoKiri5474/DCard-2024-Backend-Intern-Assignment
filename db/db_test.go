@@ -66,3 +66,20 @@ func TestInsertAd(t *testing.T) {
 		},
 	})
 }
+
+func BenchmarkInsertAd(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		InsertAd(models.JsonParse{
+			Title:   "Testing Ad",
+			StartAt: time.Now(),
+			EndAt:   time.Now().AddDate(0, 1, 0),
+			Conditions: models.Conditions{
+				AgeStart: 18,
+				AgeEnd:   30,
+				Gender:   []string{"M", "F"},
+				Country:  []string{"TW", "JP"},
+				Platform: []string{"Android", "iOS"},
+			},
+		})
+	}
+}
