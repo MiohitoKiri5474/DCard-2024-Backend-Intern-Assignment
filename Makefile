@@ -8,8 +8,8 @@ run: build create_db
 	./AD_Post
 
 test:
-	go test ./db
-	go test ./cmd/AD_Post/
+	go test -bench="." ./db
+	go test -bench="." ./cmd/AD_Post/
 
 clean:
 	rm -rf AD_Post ad.db
