@@ -21,7 +21,6 @@
 go.work
 
 node_modules/
-main
 ./AD_Post
 *.db
 test.json
