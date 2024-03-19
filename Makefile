@@ -11,4 +11,4 @@ test:
 	go test ./db
 
 clean:
-	rm -rf build ad.db
+	rm -rf AD_Post ad.db
