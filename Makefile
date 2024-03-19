@@ -1,5 +1,5 @@
 build:
-	go build cmd/AD_Post/main.go
+	go build ./cmd/AD_Post/
 
 create_db:
 	go run tools/BuildDB.go
