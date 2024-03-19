@@ -30,10 +30,13 @@ func list_data(w http.ResponseWriter, r *http.Request) {
 
 	// optional condition
 	age := QueryParams.Get("age")
-	if err := AgeCheck(age); err != nil {
+	if err := CheckAge(age); err != nil {
 		panic(err.Error())
 	}
 	gender := QueryParams.Get("gender")
+	if err := CheckGender(gender); err != nil {
+		panic(err.Error())
+	}
 	country := QueryParams.Get("country")
 	platform := QueryParams.Get("platform")
 
