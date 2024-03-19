@@ -13,7 +13,7 @@ func list_data(w http.ResponseWriter, r *http.Request) {
 	// list all data
 	defer func() {
 		if r := recover(); r != nil {
-			errMsg := fmt.Sprintf("Invalid age parameter: %v", r)
+			errMsg := fmt.Sprintf("Invalid parameter: %v", r)
 			http.Error(w, errMsg, http.StatusBadRequest)
 		}
 	}()
@@ -38,7 +38,13 @@ func list_data(w http.ResponseWriter, r *http.Request) {
 		panic(err.Error())
 	}
 	country := QueryParams.Get("country")
+	if err := CheckCountry(country); err != nil {
+		panic(err.Error())
+	}
 	platform := QueryParams.Get("platform")
+	if err := CheckPlatform(platform); err != nil {
+		panic(err.Error())
+	}
 
 	res, err := db.QueryAd(offset, limit, age, gender, country, platform)
 	if err != nil {
