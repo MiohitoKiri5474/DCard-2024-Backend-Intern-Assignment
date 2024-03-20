@@ -9,7 +9,7 @@ import (
 	"strconv"
 )
 
-func list_data(w http.ResponseWriter, r *http.Request) {
+func ListData(w http.ResponseWriter, r *http.Request) {
 	// list all data
 	defer func() {
 		if r := recover(); r != nil {
@@ -69,7 +69,7 @@ func list_data(w http.ResponseWriter, r *http.Request) {
 	w.Write(ResJson)
 }
 
-func add_data(w http.ResponseWriter, r *http.Request) {
+func AddData(w http.ResponseWriter, r *http.Request) {
 	// add new data
 	defer func() {
 		if r := recover(); r != nil {
