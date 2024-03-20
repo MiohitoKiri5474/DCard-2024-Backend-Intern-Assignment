@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"reflect"
 	"strconv"
 )
 
@@ -77,7 +78,9 @@ func AddData(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, errMsg, http.StatusBadRequest)
 		}
 	}()
+
 	var userData models.JsonParse
+	fmt.Println(reflect.TypeOf(r.Body))
 	if err := json.NewDecoder(r.Body).Decode(&userData); err != nil {
 		http.Error(w, "Failed to parse JSON", http.StatusBadRequest)
 		return
