@@ -54,14 +54,14 @@ Example:
 ```json
 {
   "title": "Dcard Intern",
-  "startAt": "2024-1-31T03:00:00.000Z",
-  "endAt": "2024-4-06T03:00:00.000Z",
+  "startAt": "2024-01-31T03:00:00.000Z",
+  "endAt": "2024-04-06T03:00:00.000Z",
   "conditions": {
     "ageStart": 18,
     "ageEnd": 24,
     "gender": ["M", "F"],
     "country": ["TW", "JP", "US"],
-    "platform": ["ios", "android", "web"]
+    "platform": ["iOS", "Android", "web"]
   }
 }
 ```
