@@ -55,7 +55,7 @@ Example:
 {
   "title": "Dcard Intern",
   "startAt": "2024-1-31T03:00:00.000Z",
-  "endAt": "2024-4-6T03:00:00.000Z",
+  "endAt": "2024-4-06T03:00:00.000Z",
   "conditions": {
     "ageStart": 18,
     "ageEnd": 24,
