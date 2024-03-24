@@ -4,6 +4,7 @@ import (
 	"AD_Post/models"
 	"fmt"
 	"strconv"
+	"strings"
 	"unicode"
 
 	"github.com/mikekonan/go-countries"
@@ -11,6 +12,9 @@ import (
 
 func CheckAge(str string) error {
 	// check age is valid
+	if str == "" {
+		return nil
+	}
 	for _, char := range str {
 		if !unicode.IsDigit(char) {
 			panic("(age) non-digit input")
@@ -24,6 +28,9 @@ func CheckAge(str string) error {
 
 func CheckGender(str string) error {
 	// check gender is valid
+	if str == "" {
+		return nil
+	}
 	if str != "F" && str != "M" {
 		panic("(gender) invalid gender")
 	}
@@ -32,6 +39,9 @@ func CheckGender(str string) error {
 
 func CheckCountry(str string) error {
 	// check country code is valid
+	if str == "" {
+		return nil
+	}
 	tmp := country.Alpha2Code(str)
 	if _, ok := country.ByAlpha2Code(tmp); !ok {
 		panic("(country code) invalid ISO 3166-1 code")
@@ -41,7 +51,11 @@ func CheckCountry(str string) error {
 
 func CheckPlatform(str string) error {
 	// check platform is valid
-	if str != "web" && str != "ios" && str != "android" {
+	if str == "" {
+		return nil
+	}
+	LowercaseStr := strings.ToLower(str)
+	if LowercaseStr != "web" && LowercaseStr != "ios" && LowercaseStr != "android" {
 		panic("(platform) invalid platform")
 	}
 	return nil

@@ -49,7 +49,7 @@ func TestCheckGenderFailed(t *testing.T) {
 }
 
 func TestCheckCountry(t *testing.T) {
-	// Test CheckGender, suppose panic will not occur
+	// Test CheckCountry, suppose panic will not occur
 	if err := CheckCountry("JP"); err != nil {
 		t.Error()
 	}
@@ -64,7 +64,7 @@ func TestCheckCountry(t *testing.T) {
 }
 
 func TestCheckCountryFailed(t *testing.T) {
-	// Test CheckGender, suppose panic will occur
+	// Test CheckCountrt, suppose panic will occur
 	defer func() {
 		if r := recover(); r != nil {
 			// Panic occurred as expected, test passed
@@ -77,8 +77,8 @@ func TestCheckCountryFailed(t *testing.T) {
 }
 
 func TestCheckPlatform(t *testing.T) {
-	// Test CheckGender, suppose panic will not occur
-	if err := CheckPlatform("ios"); err != nil {
+	// Test CheckPlatform, suppose panic will not occur
+	if err := CheckPlatform("iOS"); err != nil {
 		t.Error()
 	}
 
@@ -86,13 +86,13 @@ func TestCheckPlatform(t *testing.T) {
 		t.Error()
 	}
 
-	if err := CheckPlatform("android"); err != nil {
+	if err := CheckPlatform("Android"); err != nil {
 		t.Error()
 	}
 }
 
 func TestCheckPlatformFailed(t *testing.T) {
-	// Test CheckGender, suppose panic will occur
+	// Test CheckPlatform, suppose panic will occur
 	defer func() {
 		if r := recover(); r != nil {
 			// Panic occurred as expected, test passed
