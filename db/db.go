@@ -2,7 +2,6 @@ package db
 
 import (
 	"AD_Post/models"
-	"fmt"
 	"log"
 	"strings"
 
@@ -40,7 +39,6 @@ func ConnectDB(DDBFileName string) {
 	if err != nil {
 		log.Fatal("Failed to connect to database:", err)
 	}
-	fmt.Println("Connect Created")
 }
 
 func InsertAd(AdData models.JsonParse) error {
