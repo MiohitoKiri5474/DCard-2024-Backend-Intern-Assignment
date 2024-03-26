@@ -2,7 +2,7 @@ build:
 	go build ./cmd/AD_Post/
 
 create_db:
-	go run tools/BuildDB.go
+	go run ./tools/BuildDB/
 
 run: build create_db
 	./AD_Post
